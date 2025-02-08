@@ -92,7 +92,7 @@ const Dashboard = () => {
 
   return (
     <div className="flex justify-center min-h-screen bg-gradient-to-b from-blue-50 to-blue-200">
-      <div className="w-full max-w-md bg-white shadow-lg rounded-2xl p-6">
+      <div className="mt-10 mb-10 w-full max-w-md bg-white shadow-lg rounded-2xl p-6">
         <form onSubmit={addTask}>
           <h2 className="text-2xl font-bold text-center text-gray-800 mb-4">Task Manager</h2>
           <div className="flex flex-col gap-3">
