@@ -24,7 +24,7 @@ const Navbar = () => {
         </Link>
 
         {val ? (
-          <div className="flex space-x-9">
+          <div className="flex space-x-4">
             <Link to="/login" className="text-lg sm:text-lg sm:font-semibold text-black hover:text-gray-200">
               Login
             </Link>
