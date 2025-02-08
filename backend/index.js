@@ -7,7 +7,7 @@ dotenv.config()
 const app=express();
 app.use(express.json())
 app.use(cors());
-mongoose.connect(process.env.URL).then(()=>console.log("DB Connected"))
+mongoose.connect("mongodb+srv://anand:1925112816@cluster0.qm0ie67.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0").then(()=>console.log("DB Connected"))
 app.get('/',(req,res)=>{
     return res.status(200).send("jai sri ram")
 })

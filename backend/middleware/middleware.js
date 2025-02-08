@@ -5,7 +5,7 @@ const middleware=async (req,res,next)=>{
     try{
           const token=req.headers['x-token'];
           if(!token)return res.status(400).send("token not found")
-          const val=jwt.verify(token,process.env.KEY)
+          const val=jwt.verify(token,"1925112816")
           req.user=val;
           next();
     }
