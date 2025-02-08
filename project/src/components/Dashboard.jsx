@@ -129,7 +129,7 @@ const Dashboard = () => {
         </div>
         <div className="mt-6 space-y-3">
           {filteredTasks.map((task) => (
-            <div key={task._id} className="bg-gray-200 p-3 rounded-lg shadow-lg flex gap-2 justify-between overflow-x-auto flex-nowrap items-center">
+            <div key={task._id} className="bg-gray-200 p-3 rounded-lg shadow-lg flex gap-2 justify-between overflow-x-auto scroll-smooth flex-nowrap items-center">
               <div>
                 <p className={`font-medium break-words overflow-y-auto max-h-[50px] scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 ${task.completed ? 'line-through text-green-500' : 'text-gray-700'}`}>
                   {task.subject}

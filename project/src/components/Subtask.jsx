@@ -87,7 +87,7 @@ const Subtask = () => {
           {subtasks.map((subtask) => (
             <div
               key={subtask._id}
-              className="p-2 bg-gray-100 border border-gray-200 rounded-lg shadow-md flex items-center justify-between gap-2 overflow-x-auto"
+              className="p-2 bg-gray-100 border border-gray-200 rounded-lg shadow-md flex items-center justify-between gap-2 overflow-x-auto scroll-smooth"
             >
               <span className={subtask.completed ? "line-through text-gray-500" : ""}>{subtask.subject}</span>
               <div className="flex space-x-2 min-w-max">
