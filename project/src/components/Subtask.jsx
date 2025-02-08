@@ -20,7 +20,7 @@ const Subtask = () => {
 
   useEffect(() => {
     fetchAllSubtasks();
-  }, []);
+  }, [task_id]);
 
   const addSubtask = async (e) => {
     e.preventDefault();
@@ -40,21 +40,19 @@ const Subtask = () => {
 
   const toggleMarkSubtask = async (id, completed) => {
     try {
-      await axios.put(`https://smart-todo-list-two.vercel.app/api/togglesubtask/${id}`, {completed: !completed });
+      await axios.put(`https://smart-todo-list-two.vercel.app/api/togglesubtask/${id}`, { completed: !completed });
       fetchAllSubtasks();
-      toast.success("updated successfully")
+      toast.success("Updated successfully");
     } catch (e) {
-      console.log(e);
-      
-      toast.error(e.response.data);
+      toast.error(e.response?.data || "Error updating subtask");
     }
   };
 
   const deleteSubtask = async (_id) => {
     try {
-      await axios.delete(`https://smart-todo-list-two.vercel.app/api/deletesubtask`,{data:{_id}});
+      await axios.delete(`https://smart-todo-list-two.vercel.app/api/deletesubtask`, { data: { _id } });
       fetchAllSubtasks();
-      toast.success("deleted successfully") 
+      toast.success("Deleted successfully");
     } catch (e) {
       toast.error("Error deleting subtask");
     }
@@ -69,27 +67,30 @@ const Subtask = () => {
         Back to Dashboard
       </button>
       <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
-        <form action="" onSubmit={addSubtask}>
-        <h2 className="text-xl font-semibold text-gray-700 mb-4">Subtasks</h2>
-        <input
-          type="text"
-          value={subject}
-          onChange={(e) => setSubject(e.target.value)}
-          placeholder="Enter subtask"
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-        />
-        <button
-          type='submit'
-          className="w-full bg-blue-500 text-white py-2 mt-4 rounded-md hover:bg-blue-600 transition-all"
-        >
-          Submit
-        </button>
+        <form onSubmit={addSubtask}>
+          <h2 className="text-xl font-semibold text-gray-700 mb-4">Subtasks</h2>
+          <input
+            type="text"
+            value={subject}
+            onChange={(e) => setSubject(e.target.value)}
+            placeholder="Enter subtask"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white py-2 mt-4 rounded-md hover:bg-blue-600 transition-all"
+          >
+            Submit
+          </button>
         </form>
-        <ul className="mt-4">
+        <ul className="mt-4 space-y-2">
           {subtasks.map((subtask) => (
-            <li key={subtask._id} className="p-2 bg-gray-200 border border-gray-200 mt-2 rounded-lg flex justify-between items-center shadow-lg">
+            <div
+              key={subtask._id}
+              className="p-2 bg-gray-100 border border-gray-200 rounded-lg shadow-md flex items-center justify-between gap-2 overflow-x-auto"
+            >
               <span className={subtask.completed ? "line-through text-gray-500" : ""}>{subtask.subject}</span>
-              <div className="space-x-2">
+              <div className="flex space-x-2 min-w-max">
                 <button
                   onClick={() => toggleMarkSubtask(subtask._id, subtask.completed)}
                   className={`px-2 py-1 rounded-md text-white ${subtask.completed ? 'bg-yellow-500 hover:bg-yellow-600' : 'bg-green-500 hover:bg-green-600'}`}
@@ -103,7 +104,7 @@ const Subtask = () => {
                   Delete
                 </button>
               </div>
-            </li>
+            </div>
           ))}
         </ul>
       </div>

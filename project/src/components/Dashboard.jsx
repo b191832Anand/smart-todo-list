@@ -15,12 +15,10 @@ const Dashboard = () => {
         headers: { 'x-token': localStorage.getItem('token') },
       });
       const fetchedTasks = Array.isArray(response.data) ? response.data : response.data.tasks || [];
-
       setTasks(fetchedTasks);
-
       fetchedTasks.forEach((task) => {
         if (new Date(task.date) < new Date()) {
-          deleteTask(task._id,0);
+          deleteTask(task._id, 0);
         }
       });
     } catch (e) {
@@ -38,10 +36,9 @@ const Dashboard = () => {
       toast.error('Please enter a subject and a date');
       return;
     }
-    const val=new Date(date);
-    if(val<new Date()){
-       toast.error("enter a valid date")
-       return ;
+    if (new Date(date) < new Date()) {
+      toast.error('Enter a valid date');
+      return;
     }
     try {
       await axios.post(
@@ -58,12 +55,12 @@ const Dashboard = () => {
     }
   };
 
-  const deleteTask = async (id,val) => {
+  const deleteTask = async (id, val) => {
     try {
       await axios.delete(`https://smart-todo-list-two.vercel.app/api/deletetask/${id}`, {
         headers: { 'x-token': localStorage.getItem('token') },
       });
-      if(val==1)toast.success("deleted successfully")
+      if (val === 1) toast.success('Deleted successfully');
       fetchTasks();
     } catch (e) {
       console.error('Error deleting task:', e);
@@ -132,33 +129,28 @@ const Dashboard = () => {
         </div>
         <div className="mt-6 space-y-3">
           {filteredTasks.map((task) => (
-            <div key={task._id} className="bg-gray-200 p-3 rounded-lg shadow-lg flex justify-between items-center">
+            <div key={task._id} className="bg-gray-200 p-3 rounded-lg shadow-lg flex gap-2 justify-between overflow-x-auto flex-nowrap items-center">
               <div>
-                <p className={`font-medium ${task.completed ? 'line-through text-green-500' : 'text-gray-700'}`}>
+                <p className={`font-medium break-words overflow-y-auto max-h-[50px] scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 ${task.completed ? 'line-through text-green-500' : 'text-gray-700'}`}>
                   {task.subject}
                 </p>
                 <p className="text-sm text-gray-600">{new Date(task.date).toDateString()}</p>
               </div>
-              <div className="flex gap-2">
+              <div className="flex flex-nowrap gap-2">
                 <button
                   onClick={() => toggleCompletion(task._id, task.completed)}
-                  className={`px-2 py-1 sm:px-3 sm:py-2 ${
-                    task.completed ? 'bg-gray-400' : 'bg-green-500'
-                  } text-white rounded-lg hover:bg-green-600`}
+                  className={`px-2 py-1 sm:px-3 sm:py-2 flex-shrink-0 ${task.completed ? 'bg-gray-400' : 'bg-green-500'} text-white rounded-lg hover:bg-green-600`}
                 >
                   {task.completed ? 'Unmark' : 'Mark'}
                 </button>
-                <Link to={`/subtask/${task._id}`} className="px-2 py-1 sm:px-3 sm:py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600">
+                <Link to={`/subtask/${task._id}`} className="px-2 py-1 sm:px-3 sm:py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 flex-shrink-0">
                   Subtask
                 </Link>
-                <button
-                  onClick={() => deleteTask(task._id,1)}
-                  className="px-2 py-1 sm:px-3 sm:py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
-                >
+                <button onClick={() => deleteTask(task._id, 1)} className="px-2 py-1 sm:px-3 sm:py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 flex-shrink-0">
                   Delete
                 </button>
               </div>
-            </div>
+              </div>
           ))}
         </div>
       </div>
