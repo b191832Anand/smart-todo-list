@@ -12,18 +12,21 @@ Content-Type: application/json
 
 {
     "email":"anandkumarch337@gmail.com",
-    "password":"123"
+    "password":"12"
 }
 ###
-post http://localhost:5000/api/addsubtask
+get http://localhost:5000/api/allsubtask/67a5f129fd587cb2c618977d
 Content-Type: application/json
-
-{
-    "to_id":"67a608f791e63dd3acedb1db",
-    "subject":"added review",
-}
 
 ### 
 get http://localhost:5000/api/particulartask
 Content-Type: application/json
 x-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YTI0Y2UwNDdmMzFmNjkwNjU0Mjg5MSIsImlhdCI6MTczODkyNDU4MCwiZXhwIjoxNzM4OTI4MTgwfQ.U9v9PYDVFjws6v4t1dEJLhQREOFcvgL40o5ZvtCTOoY
+
+###
+delete http://localhost:5000/api/deletesubtask
+Content-Type: application/json
+
+{
+    "_id":"67a6147d9f9c9040ba8d71db"
+}

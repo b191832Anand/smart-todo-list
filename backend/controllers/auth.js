@@ -31,7 +31,7 @@ const login = async (req, res) => {
         const exist = await todo.findOne({ email });
 
         if (!exist || password !== exist.password) {
-            return res.status(400).json({ message: "Invalid credentials" });
+            return res.status(400).send("invalid credentials")
         }
 
         const token = jwt.sign({ id: exist.id },"1925112816", { expiresIn: '1h' });
