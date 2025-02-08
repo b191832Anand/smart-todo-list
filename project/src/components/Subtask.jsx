@@ -59,14 +59,14 @@ const Subtask = () => {
   };
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-gray-100 p-4">
+    <div className="flex flex-col items-center min-h-screen bg-gray-200 p-4">
+      <div className="sm:mt-10 sm:mb-10 bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
       <button
         onClick={() => navigate('/dashboard')}
         className="mb-4 bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-800 transition-all"
       >
         Back to Dashboard
       </button>
-      <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
         <form onSubmit={addSubtask}>
           <h2 className="text-xl font-semibold text-gray-700 mb-4">Subtasks</h2>
           <input
