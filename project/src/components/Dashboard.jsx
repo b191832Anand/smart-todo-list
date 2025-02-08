@@ -62,7 +62,9 @@ const Dashboard = () => {
       });
       if (val === 1) toast.success('Deleted successfully');
       fetchTasks();
-    } catch (e) {}
+    } catch (e) {
+      console.error('Error deleting task:', e);
+    }
   };
 
   const toggleCompletion = async (id, completed) => {
@@ -89,7 +91,7 @@ const Dashboard = () => {
     .sort((a, b) => (filter === 'closest' ? new Date(a.date) - new Date(b.date) : 0));
 
   return (
-    <div className="flex justify-center min-h-screen bg-gradient-to-b from-blue-50 to-blue-200">
+    <div className="flex justify-center min-h-screen bg-gray-200">
       <div className="mt-10 w-full max-w-md bg-white shadow-lg rounded-2xl p-6">
         <form onSubmit={addTask}>
           <h2 className="text-2xl font-bold text-center text-gray-800 mb-4">Task Manager</h2>
@@ -127,23 +129,28 @@ const Dashboard = () => {
         </div>
         <div className="mt-6 space-y-3">
           {filteredTasks.map((task) => (
-            <div key={task._id} className="bg-gray-200 p-3 rounded-lg shadow-lg flex gap-2 justify-between items-center">
+            <div key={task._id} className="bg-gray-200 p-3 rounded-lg shadow-lg flex gap-2 justify-between overflow-x-auto scroll-smooth flex-nowrap items-center">
               <div>
-                <p className={`font-medium ${task.completed ? 'line-through text-green-500' : 'text-gray-700'}`}>{task.subject}</p>
+                <p className={`font-medium break-words overflow-y-auto max-h-[50px] scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 ${task.completed ? 'line-through text-green-500' : 'text-gray-700'}`}>
+                  {task.subject}
+                </p>
                 <p className="text-sm text-gray-600">{new Date(task.date).toDateString()}</p>
               </div>
-              <div className="flex gap-2">
-                <button onClick={() => toggleCompletion(task._id, task.completed)} className="px-3 py-2 rounded-lg text-white bg-green-500 hover:bg-green-600">
+              <div className="flex flex-nowrap gap-2">
+                <button
+                  onClick={() => toggleCompletion(task._id, task.completed)}
+                  className={`px-2 py-1 sm:px-3 sm:py-2 flex-shrink-0 ${task.completed ? 'bg-gray-400' : 'bg-green-500'} text-white rounded-lg hover:bg-green-600`}
+                >
                   {task.completed ? 'Unmark' : 'Mark'}
                 </button>
-                <Link to={`/subtask/${task._id}`} className="px-3 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600">
+                <Link to={`/subtask/${task._id}`} className="px-2 py-1 sm:px-3 sm:py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 flex-shrink-0">
                   Subtask
                 </Link>
-                <button onClick={() => deleteTask(task._id, 1)} className="px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">
+                <button onClick={() => deleteTask(task._id, 1)} className="px-2 py-1 sm:px-3 sm:py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 flex-shrink-0">
                   Delete
                 </button>
               </div>
-            </div>
+              </div>
           ))}
         </div>
       </div>
