@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   const [subject, setSubject] = useState('');
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState();
   const [tasks, setTasks] = useState([]);
   const [filter, setFilter] = useState('all');
 
@@ -105,7 +105,7 @@ const Dashboard = () => {
             />
             <input
               type="date"
-              value={date}
+              value={date?date:"enter any date"}
               onChange={(e) => setDate(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500"
             />
