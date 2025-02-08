@@ -11,7 +11,7 @@ const Subtask = () => {
 
   const fetchAllSubtasks = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:5000/api/allsubtask/${task_id}`);
+      const { data } = await axios.get(`https://smart-todo-list-two.vercel.app/api/allsubtask/${task_id}`);
       setSubtasks(data);
     } catch (e) {
       toast.error("Error fetching subtasks");
@@ -29,7 +29,7 @@ const Subtask = () => {
       return;
     }
     try {
-      await axios.post('http://localhost:5000/api/addsubtask', { task_id, subject });
+      await axios.post('https://smart-todo-list-two.vercel.app/api/addsubtask', { task_id, subject });
       toast.success("Subtask added");
       setSubject('');
       fetchAllSubtasks();
@@ -40,7 +40,7 @@ const Subtask = () => {
 
   const toggleMarkSubtask = async (id, completed) => {
     try {
-      await axios.put(`http://localhost:5000/api/togglesubtask/${id}`, {completed: !completed });
+      await axios.put(`https://smart-todo-list-two.vercel.app/api/togglesubtask/${id}`, {completed: !completed });
       fetchAllSubtasks();
       toast.success("updated successfully")
     } catch (e) {
@@ -52,7 +52,7 @@ const Subtask = () => {
 
   const deleteSubtask = async (_id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/deletesubtask`,{data:{_id}});
+      await axios.delete(`https://smart-todo-list-two.vercel.app/api/deletesubtask`,{data:{_id}});
       fetchAllSubtasks();
       toast.success("deleted successfully") 
     } catch (e) {

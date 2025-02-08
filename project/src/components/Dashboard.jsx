@@ -11,7 +11,7 @@ const Dashboard = () => {
 
   const fetchTasks = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/particulartask', {
+      const response = await axios.get('https://smart-todo-list-two.vercel.app/api/particulartask', {
         headers: { 'x-token': localStorage.getItem('token') },
       });
       const fetchedTasks = Array.isArray(response.data) ? response.data : response.data.tasks || [];
@@ -45,7 +45,7 @@ const Dashboard = () => {
     }
     try {
       await axios.post(
-        'http://localhost:5000/api/addtask',
+        'https://smart-todo-list-two.vercel.app/api/addtask',
         { subject, date, completed: false },
         { headers: { 'x-token': localStorage.getItem('token') } }
       );
@@ -60,7 +60,7 @@ const Dashboard = () => {
 
   const deleteTask = async (id,val) => {
     try {
-      await axios.delete(`http://localhost:5000/api/deletetask/${id}`, {
+      await axios.delete(`https://smart-todo-list-two.vercel.app/api/deletetask/${id}`, {
         headers: { 'x-token': localStorage.getItem('token') },
       });
       if(val==1)toast.success("deleted successfully")
@@ -73,7 +73,7 @@ const Dashboard = () => {
   const toggleCompletion = async (id, completed) => {
     try {
       await axios.put(
-        `http://localhost:5000/api/updatetask/${id}`,
+        `https://smart-todo-list-two.vercel.app/api/updatetask/${id}`,
         { completed: !completed },
         { headers: { 'x-token': localStorage.getItem('token') } }
       );

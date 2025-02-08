@@ -18,7 +18,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/signup', { username, email, password });
+      await axios.post('https://smart-todo-list-two.vercel.app/api/signup', { username, email, password });
       toast.success('Signup successful');
       navigate('/login');
     } catch (e) {
